@@ -115,12 +115,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
 
     def fix_relative_path(arg: str) -> str:
-        arg_path = Path(arg).resolve()
-        if arg_path.exists():
+        arg_path = Path(arg)
+        if not arg_path.is_absolute() and arg_path.exists():
+            arg_path = arg_path.resolve()
             try:
                 arg = str(arg_path.relative_to(directory))
             except ValueError:
-                pass
+                arg = str(arg_path)
         return arg
 
     executable, *args = [fix_relative_path(arg) for arg in [executable, *args]]
