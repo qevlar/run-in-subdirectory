@@ -59,14 +59,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 verbose = True
             elif option in ("-d", "--directory"):
                 if level != 0:
-                    raise GetoptError(f"option -d/--directory is not allowed with option -l/--level")
+                    raise GetoptError("option -d/--directory is not allowed with option -l/--level")
                 try:
                     directory = Path(value).resolve()
                 except Exception:
                     raise GetoptError(f"option {option} requires a directory as an argument, got {value}", option)
             elif option in ("-l", "--level"):
                 if directory is not None:
-                    raise GetoptError(f"option -l/--level is not allowed with option -d/--directory")
+                    raise GetoptError("option -l/--level is not allowed with option -d/--directory")
                 try:
                     level = int(value)
                     if level < 0:
