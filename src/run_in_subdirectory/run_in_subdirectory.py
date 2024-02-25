@@ -126,7 +126,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     executable, *args = [fix_relative_path(arg) for arg in [executable, *args]]
 
     if verbose:
-        print(f"Calling `{shlex.join([executable, *args])}` from {directory}")
+        print(f"calling `{shlex.join([executable, *args])}` from {directory}")
 
     try:
         subprocess.run([executable, *args], cwd=directory, check=True)
