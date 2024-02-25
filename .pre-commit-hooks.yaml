@@ -1,0 +1,26 @@
+- id: run-in-subdirectory
+  name: run in subdirectory
+  description: runs the command in the subdirectory specified in the first argument.
+  entry: run-in-subdirectory --directory
+  language: python
+
+- id: run-in-first-level-subdirectory
+  name: run in first-level subdirectory
+  description: runs the command in the first-level subdirectory extracted from a path of the last matched file.
+  entry: run-in-subdirectory --level 1
+  language: python
+  always_run: false
+
+- id: run-in-second-level-subdirectory
+  name: run in second-level subdirectory
+  description: runs the command in the second-level subdirectory extracted from a path of the last matched file.
+  entry: run-in-subdirectory --level 2
+  language: python
+  always_run: false
+
+- id: run-in-third-level-subdirectory
+  name: run in third-level subdirectory
+  description: runs the command in the third-level subdirectory extracted from a path of the last matched file.
+  entry: run-in-subdirectory --level 3
+  language: python
+  always_run: false
