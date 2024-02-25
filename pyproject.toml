@@ -30,6 +30,7 @@ isort = "^5.13.2"
 ruff = "^0.2.2"
 
 [tool.poetry.group.test.dependencies]
+coverage = {extras = ["toml"], version = "^7.4.3"}
 pytest = "^8.0.1"
 pytest-cov = "^4.1.0"
 
@@ -44,5 +45,8 @@ profile = "black"
 line_length = 120
 skip_gitignore = true
 
+[tool.coverage.run]
+omit = ["__main__.py"]
+
 [tool.coverage.report]
-exclude_also = ["if __name__ == \"__main__\":"]
+exclude_also = ["if __name__ == ['\"]__main__['\"]:"]
