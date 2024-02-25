@@ -1,0 +1,37 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "run-in-subdirectory"
+version = "0.1.0"
+description = "A command-line utility for running command in subdirectory with a set of pre-commit hooks"
+authors = ["Egor Makarenko <egormkn@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "run_in_subdirectory", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+isort = "^5.13.2"
+ruff = "^0.2.2"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.0.1"
+pytest-cov = "^4.1.0"
+
+[tool.poetry.scripts]
+run-in-subdirectory = { callable = "run_in_subdirectory:main" }
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+skip_gitignore = true
+
+[tool.coverage.report]
+exclude_also = ["if __name__ == \"__main__\":"]
