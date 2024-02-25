@@ -13,19 +13,33 @@ A command-line utility for running command in subdirectory with a set of [pre-co
 ## Usage
 
 ### pre-commit hook
+
+Example:
+
 ```yaml
 repos:
   - repo: https://github.com/egormkn/run-in-subdirectory
     rev: main
     hooks:
+        # Run command in a subdirectory passed as the first argument
+      - id: run-in-subdirectory
+        alias: pylint
+        name: Lint Python sources
+        args: ["server", "pylint"]
+        types: [ python ]
+        files: ^server/
+        
+        # Or use run-in-<N>-level-subdirectory hooks to extract 
+        # subdirectory from the last file passed to the hook
       - id: run-in-first-level-subdirectory
         alias: prettier
         name: Format code with Prettier
         args: ["npx --no -- prettier -w -u"]
+        types: [ text ]
         files: ^client/
 ```
 
-### As a standalone program
+### command-line program
 
 Install with pip:
 
@@ -52,8 +66,8 @@ options:
 
 example:
   When this program is executed with the following command:
-    run-in-subdirectory -d frontend/ yarn eslint frontend/src/index.ts
+    run-in-subdirectory -d client/ npx --no eslint client/src/index.ts
   Then the command will be executed:
-    yarn eslint src/index.ts
-  and the current working directory will be set to frontend/
+    npx --no eslint src/index.ts
+  and the current working directory will be set to client/
 ```
