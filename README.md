@@ -1,6 +1,6 @@
 # run-in-subdirectory
 
-A command-line utility for running command in subdirectory with a set of [pre-commit](https://github.com/pre-commit/pre-commit) hooks
+A command-line utility for running commands in a subdirectory (e.g., linters on a monorepo) with a set of [pre-commit](#pre-commit) hooks
 
 [![PyPI - Version](https://img.shields.io/pypi/v/run-in-subdirectory.svg)](https://pypi.org/project/run-in-subdirectory/)
 [![PyPI - License](https://img.shields.io/pypi/l/run-in-subdirectory)](https://github.com/egormkn/run-in-subdirectory/blob/main/LICENSE)
@@ -12,36 +12,43 @@ A command-line utility for running command in subdirectory with a set of [pre-co
 
 ## Usage
 
-### pre-commit hook
+### pre-commit
 
-Example:
+- Use [`run-in-subdirectory`](.pre-commit-hooks.yaml) hook to run command in a subdirectory passed as the first argument:
 
-```yaml
-repos:
-  - repo: https://github.com/egormkn/run-in-subdirectory
-    rev: main
-    hooks:
-        # Run command in a subdirectory passed as the first argument
-      - id: run-in-subdirectory
-        alias: pylint
-        name: Lint Python sources
-        args: ["server", "pylint"]
-        types: [ python ]
-        files: ^server/
-        
-        # Or use run-in-<N>-level-subdirectory hooks to extract 
-        # subdirectory from the last file passed to the hook
-      - id: run-in-first-level-subdirectory
-        alias: prettier
-        name: Format code with Prettier
-        args: ["npx --no -- prettier -w -u"]
-        types: [ text ]
-        files: ^client/
-```
+  ```yaml
+  repos:
+    - repo: https://github.com/egormkn/run-in-subdirectory
+      rev: main
+      hooks:
+        - id: run-in-subdirectory
+          alias: prettier
+          name: Format code with Prettier
+          args: ["client", "npx --no -- prettier -w -u"]
+          types: [ text ]
+          files: ^client/
+  ```
 
-### command-line program
+- Use one of [`run-in-...-level-subdirectory`](.pre-commit-hooks.yaml) hooks to automatically extract `first`, `second` or `third`-level subdirectory from the file path passed as the last positional argument. 
+  
+  Note that you should set `files`, `types` and `exclude` properties so that the hook only runs for files in that subdirectory.
 
-Install with pip:
+  ```yaml
+  repos:
+    - repo: https://github.com/egormkn/run-in-subdirectory
+      rev: main
+      hooks:
+        - id: run-in-first-level-subdirectory
+          alias: prettier
+          name: Format code with Prettier
+          args: ["npx --no -- prettier -w -u"]
+          types: [ text ]
+          files: ^client/
+  ```
+
+### command-line
+
+`run-in-subdirectory` can also be used as a command-line utility:
 
 ```bash
 pip install run-in-subdirectory
