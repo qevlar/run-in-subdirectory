@@ -1,0 +1,51 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+default_install_hook_types: [ pre-commit, commit-msg ]
+default_stages: [ pre-commit, pre-merge-commit, pre-push, manual ]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+        args: [ --fix=no ]
+      - id: name-tests-test
+        args: [ --pytest-test-first ]
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.15.0
+    hooks:
+      - id: commitizen
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        language: system
+        entry: poetry run ruff --fix
+        types: [ python ]
+      - id: isort
+        name: isort
+        language: system
+        entry: poetry run isort
+        types: [ python ]
+      - id: black
+        name: black
+        language: system
+        entry: poetry run black
+        types: [ python ]
