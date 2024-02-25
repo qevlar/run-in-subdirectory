@@ -5,10 +5,21 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "run-in-subdirectory"
 version = "0.1.0"
-description = "A command-line utility for running command in subdirectory with a set of pre-commit hooks"
+description = "A command-line utility for running commands in a subdirectory with a set of pre-commit hooks"
+license = "MIT"
 authors = ["Egor Makarenko <egormkn@yandex.ru>"]
 readme = "README.md"
+repository = "https://github.com/egormkn/run-in-subdirectory"
+keywords = ["pre-commit", "subdirectory", "subfolder", "monorepo", "hook"]
 packages = [{include = "run_in_subdirectory", from = "src"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Utilities"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
