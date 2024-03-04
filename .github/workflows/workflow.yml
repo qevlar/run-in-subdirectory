@@ -33,7 +33,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: github.ref_type == "tag"
+    if: github.ref_type == 'tag'
     environment: release
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
