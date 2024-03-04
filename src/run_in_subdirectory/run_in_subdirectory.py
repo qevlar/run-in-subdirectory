@@ -95,7 +95,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif level > 0:
         try:
             last_argument_path = Path(args[-1]).resolve().relative_to(Path.cwd())
-            parents = last_argument_path.parents
+            parents = list(last_argument_path.parents)
             if len(parents) - 1 < level:
                 raise Exception(f"path {last_argument_path} doesn't have a subdirectory at level {level}")
             directory = parents[-level - 1]
