@@ -1,9 +1,7 @@
-name: Release
+name: CI/CD
 
 on:
   push:
-    tags:
-      - "*.*.*"
 
 jobs:
   test:
@@ -35,6 +33,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: github.ref_type == "tag"
     environment: release
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
