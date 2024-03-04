@@ -1,6 +1,10 @@
-# run-in-subdirectory
+<p align="center">
+  <img width="128" alt="pre-commit-subdirectory logo" src="assets/logo.png">
+</p>
 
-A command-line utility for running commands in a subdirectory (e.g., linters on a monorepo) with a set of [pre-commit](#pre-commit) hooks
+# pre-commit-subdirectory
+
+A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of [pre-commit](#pre-commit) hooks
 
 [![PyPI - Version](https://img.shields.io/pypi/v/run-in-subdirectory.svg)](https://pypi.org/project/run-in-subdirectory/)
 [![PyPI - License](https://img.shields.io/pypi/l/run-in-subdirectory)](https://github.com/egormkn/run-in-subdirectory/blob/main/LICENSE)
@@ -12,13 +16,13 @@ A command-line utility for running commands in a subdirectory (e.g., linters on 
 
 ## Usage
 
-### pre-commit
+### As a pre-commit hook
 
 - Use [`run-in-subdirectory`](.pre-commit-hooks.yaml) hook to run command in a subdirectory passed as the first argument:
 
   ```yaml
   repos:
-    - repo: https://github.com/egormkn/run-in-subdirectory
+    - repo: https://github.com/egormkn/pre-commit-subdirectory
       rev: main
       hooks:
         - id: run-in-subdirectory
@@ -35,7 +39,7 @@ A command-line utility for running commands in a subdirectory (e.g., linters on 
 
   ```yaml
   repos:
-    - repo: https://github.com/egormkn/run-in-subdirectory
+    - repo: https://github.com/egormkn/pre-commit-subdirectory
       rev: main
       hooks:
         - id: run-in-first-level-subdirectory
@@ -46,7 +50,7 @@ A command-line utility for running commands in a subdirectory (e.g., linters on 
           files: ^client/
   ```
 
-### command-line
+### As a command-line utility
 
 `run-in-subdirectory` can also be used as a command-line utility:
 
