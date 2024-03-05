@@ -1,7 +1,6 @@
 name: CI/CD
 
-on:
-  push:
+on: [push, pull_request]
 
 env:
   POETRY_VERSION: "1.8.2"
@@ -24,12 +23,18 @@ jobs:
         run: pipx install poetry==${{ env.POETRY_VERSION }}
       - name: Install dependencies
         run: poetry install
-      - name: Run tests
-        run: poetry run pytest
       - name: Install pre-commit
         run: pipx install pre-commit
       - name: Check files with pre-commit
         run: pre-commit run --all-files
+      - name: Run tests
+        run: poetry run pytest --cov
+      - name: Upload coverage reports to Codecov
+        if: ${{ matrix.python-version == env.DEFAULT_PYTHON_VERSION }}
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: egormkn/run-in-subdirectory
 
   release:
     name: Release
