@@ -2,9 +2,9 @@
   <img width="128" alt="pre-commit-subdirectory logo" src="assets/logo.png">
 </p>
 
-# pre-commit-subdirectory
+# run-in-subdirectory
 
-A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of [pre-commit](#pre-commit) hooks
+A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of [pre-commit](#as-a-pre-commit-hook) hooks
 
 [![PyPI - Version](https://img.shields.io/pypi/v/run-in-subdirectory.svg)](https://pypi.org/project/run-in-subdirectory/)
 [![PyPI - License](https://img.shields.io/pypi/l/run-in-subdirectory)](https://github.com/egormkn/run-in-subdirectory/blob/main/LICENSE)
@@ -22,7 +22,7 @@ A command-line utility for running commands in subdirectories (e.g. in a monorep
 
   ```yaml
   repos:
-    - repo: https://github.com/egormkn/pre-commit-subdirectory
+    - repo: https://github.com/egormkn/run-in-subdirectory
       rev: main
       hooks:
         - id: run-in-subdirectory
@@ -39,7 +39,7 @@ A command-line utility for running commands in subdirectories (e.g. in a monorep
 
   ```yaml
   repos:
-    - repo: https://github.com/egormkn/pre-commit-subdirectory
+    - repo: https://github.com/egormkn/run-in-subdirectory
       rev: main
       hooks:
         - id: run-in-first-level-subdirectory
