@@ -6,6 +6,8 @@
 
 A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of [pre-commit](#as-a-pre-commit-hook) hooks
 
+[![Build](https://img.shields.io/github/actions/workflow/status/egormkn/run-in-subdirectory/workflow.yml)](https://github.com/egormkn/run-in-subdirectory/actions/workflows/workflow.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/egormkn/run-in-subdirectory?token=4GI2X9GPTC)](https://codecov.io/gh/egormkn/run-in-subdirectory)
 [![PyPI - Version](https://img.shields.io/pypi/v/run-in-subdirectory.svg)](https://pypi.org/project/run-in-subdirectory/)
 [![PyPI - License](https://img.shields.io/pypi/l/run-in-subdirectory)](https://github.com/egormkn/run-in-subdirectory/blob/main/LICENSE)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/run-in-subdirectory)
