@@ -28,7 +28,7 @@ jobs:
       - name: Check files with pre-commit
         run: pre-commit run --all-files
       - name: Run tests
-        run: poetry run pytest --cov
+        run: poetry run pytest --cov --cov-report xml
       - name: Upload coverage reports to Codecov
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON_VERSION }}
         uses: codecov/codecov-action@v4.0.1
