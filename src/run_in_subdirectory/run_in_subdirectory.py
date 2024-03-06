@@ -20,10 +20,10 @@ def get_parser() -> argparse.ArgumentParser:
             """\
             example:
               When this program is executed with the following command:
-                %(prog)s -d client/ npx --no eslint client/src/index.ts
+                %(prog)s -d client npx --no prettier client/src/index.ts
               Then the command will be executed:
-                npx --no eslint src/index.ts
-              and the current working directory will be set to client/
+                npx --no prettier src/index.ts
+              with the current working directory set to `client`.
             """
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
