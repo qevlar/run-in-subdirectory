@@ -9,11 +9,11 @@
 [![Linting: ruff](https://img.shields.io/badge/linting-ruff-261230)](https://github.com/astral-sh/ruff)
 
 <div align="center">
-  <img width="100" alt="run-in-subdirectory logo" src="assets/logo.png">
+  <img width="100" alt="run pre-commit in subdirectory" src="https://raw.githubusercontent.com/egormkn/run-in-subdirectory/main/assets/logo.png">
 
   # run-in-subdirectory
 
-  A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of [pre-commit](#as-a-pre-commit-hook) hooks
+  A command-line utility for running commands in subdirectories (e.g. in a monorepo) with a set of pre-commit hooks
 
 </div>
 
