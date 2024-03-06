@@ -29,7 +29,7 @@
   ```yaml
   repos:
     - repo: https://github.com/egormkn/run-in-subdirectory
-      rev: 0.2.0
+      rev: 1.0.0
       hooks:
         - id: run-in-subdirectory
           alias: prettier
@@ -52,7 +52,7 @@
   ```yaml
   repos:
     - repo: https://github.com/egormkn/run-in-subdirectory
-      rev: 0.2.0
+      rev: 1.0.0
       hooks:
         - id: run-in-first-level-subdirectory
           alias: prettier
@@ -78,7 +78,7 @@
           name: Format client code with Prettier
           language: python
           additional_dependencies:
-            - "run-in-subdirectory==0.2.0"
+            - "run-in-subdirectory==1.0.0"
           entry: run-in-subdirectory -d client npx --no -- prettier -w -u
           types: [ text ]
           files: ^client/
