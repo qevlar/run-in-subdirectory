@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import shlex
 import shutil
 import subprocess
@@ -11,6 +12,16 @@ import textwrap
 from collections.abc import Sequence
 from getopt import GetoptError, getopt
 from pathlib import Path
+
+
+def get_env() -> dict[str, str]:
+    current_env = os.environ.copy()
+
+    # Force poetry to use subdir's virtual env
+    if "VIRTUAL_ENV" in current_env:
+        del current_env["VIRTUAL_ENV"]
+
+    return current_env
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -28,14 +39,30 @@ def get_parser() -> argparse.ArgumentParser:
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("-v", "--verbose", action="store_true", help="Print information about a command to be called")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Print information about a command to be called",
+    )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
-        "-l", "--level", type=int, default=0, help="Subdirectory level (%(default)s for top-level directory)"
+        "-l",
+        "--level",
+        type=int,
+        default=0,
+        help="Subdirectory level (%(default)s for top-level directory)",
     )
-    group.add_argument("-d", "--directory", type=str, help="Subdirectory within which the subprocess will be executed")
+    group.add_argument(
+        "-d",
+        "--directory",
+        type=str,
+        help="Subdirectory within which the subprocess will be executed",
+    )
     parser.add_argument("executable", type=str, help="Executable to run")
-    parser.add_argument("args", nargs="*", type=str, default=[], help="Sequence of program arguments")
+    parser.add_argument(
+        "args", nargs="*", type=str, default=[], help="Sequence of program arguments"
+    )
     return parser
 
 
@@ -50,7 +77,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     verbose = False
 
     try:
-        options, command = getopt(argv, "hvl:d:", ["help", "verbose", "level=", "directory="])
+        options, command = getopt(
+            argv, "hvl:d:", ["help", "verbose", "level=", "directory="]
+        )
         for option, value in options:
             if option in ("-h", "--help"):
                 parser.print_help()
@@ -59,21 +88,29 @@ def main(argv: Sequence[str] | None = None) -> int:
                 verbose = True
             elif option in ("-d", "--directory"):
                 if level != 0:
-                    raise GetoptError("option -d/--directory is not allowed with option -l/--level")
+                    raise GetoptError(
+                        "option -d/--directory is not allowed with option -l/--level"
+                    )
                 try:
                     directory = Path(value).resolve()
                 except Exception:
-                    raise GetoptError(f"option {option} requires a directory as an argument, got {value}", option)
+                    raise GetoptError(
+                        f"option {option} requires a directory as an argument, got {value}",
+                        option,
+                    )
             elif option in ("-l", "--level"):
                 if directory is not None:
-                    raise GetoptError("option -l/--level is not allowed with option -d/--directory")
+                    raise GetoptError(
+                        "option -l/--level is not allowed with option -d/--directory"
+                    )
                 try:
                     level = int(value)
                     if level < 0:
                         raise ValueError
                 except Exception:
                     raise GetoptError(
-                        f"option {option} requires a non-negative integer as an argument, got {value}", option
+                        f"option {option} requires a non-negative integer as an argument, got {value}",
+                        option,
                     )
 
         if not command or not shlex.split(command[0]):
@@ -84,7 +121,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         args = [*args, *command_args]
 
         if level > 0 and not args:
-            raise GetoptError(f"option -l/--level requires a file path as the last argument to {parser.prog}")
+            raise GetoptError(
+                f"option -l/--level requires a file path as the last argument to {parser.prog}"
+            )
     except GetoptError as e:
         print(e, file=sys.stderr)
         parser.print_usage(sys.stderr)
@@ -97,7 +136,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             last_argument_path = Path(args[-1]).resolve().relative_to(Path.cwd())
             parents = list(last_argument_path.parents)
             if len(parents) - 1 < level:
-                raise Exception(f"path {last_argument_path} doesn't have a subdirectory at level {level}")
+                raise Exception(
+                    f"path {last_argument_path} doesn't have a subdirectory at level {level}"
+                )
             directory = parents[-level - 1]
         except Exception as e:
             print(e, file=sys.stderr)
@@ -130,7 +171,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"calling `{shlex.join([executable, *args])}` from {directory}")
 
     try:
-        subprocess.run([executable, *args], cwd=directory, check=True)
+        subprocess.run([executable, *args], cwd=directory, check=True, env=get_env())
         return 0
     except subprocess.CalledProcessError as ex:
         return ex.returncode
