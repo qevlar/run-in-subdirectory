@@ -24,3 +24,9 @@
   entry: run-in-subdirectory --level 3
   language: python
   always_run: false
+
+- id: poetry-run-in-subdirectory
+  name: run poetry in subdirectory
+  description: runs the poetry command in the subdirectory specified in the first argument.
+  entry: poetry run run-in-subdirectory --directory
+  language: python
