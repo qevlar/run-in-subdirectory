@@ -22,20 +22,20 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.2.0"
-isort = "^5.13.2"
-ruff = "^0.2.2"
+black = "^25.1.0"
+isort = "^6.0.0"
+ruff = "^0.9.7"
 
 [tool.poetry.group.test.dependencies]
-coverage = {extras = ["toml"], version = "^7.4.3"}
-pytest = "^8.0.1"
-pytest-cov = "^4.1.0"
+coverage = {extras = ["toml"], version = "7.6.12"}
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
 
 [tool.poetry.scripts]
-run-in-subdirectory = { callable = "run_in_subdirectory:main" }
+run-in-subdirectory = "run_in_subdirectory:main"
 
 [tool.black]
 line-length = 120
